@@ -20,10 +20,25 @@ public class Ui {
         System.out.println(divider + "\n");
     }
 
-    public static void showList(Object[] list) {
+    public static void showMarkTaskMessage(Task task) {
         System.out.println(divider);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("    " + task.toString());
+        System.out.println(divider + "\n");
+    }
+
+    public static void showUnmarkTaskMessage(Task task) {
+        System.out.println(divider);
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("    " + task.toString());
+        System.out.println(divider + "\n");
+    }
+
+    public static void showList(Task[] list) {
+        System.out.println(divider);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
-            System.out.println(i + ". " + list[i - 1]);
+            System.out.println(i + "." + list[i - 1].toString());
         }
         System.out.println(divider + "\n");
     }
