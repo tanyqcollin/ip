@@ -24,6 +24,28 @@ public class Parser {
                 currUnmarkTask.markAsNotDone();
                 Ui.showUnmarkTaskMessage(currUnmarkTask);
                 break;
+            case "todo":
+                ToDo toDoTask = new ToDo(words[1]);
+                list.add(toDoTask);
+                Ui.showTask(toDoTask, list.size());
+                break;
+            case "deadline":
+                String[] deadlineDetail = words[1].split("/");
+                Deadline deadlineTask = new Deadline(deadlineDetail[0],
+                                                    deadlineDetail[1].substring(3)
+                                                    );
+                list.add(deadlineTask);
+                Ui.showTask(deadlineTask, list.size());
+                break;
+            case "event":
+                String[] eventDetail = words[1].split("/");
+                Event eventTask = new Event(eventDetail[0],
+                                            eventDetail[1].substring(5),
+                                            eventDetail[2].substring(3)
+                                            );
+                list.add(eventTask);
+                Ui.showTask(eventTask, list.size());
+                break;
             default:
                 list.add(new Task(input));
                 Ui.echo(input);

@@ -20,6 +20,14 @@ public class Ui {
         System.out.println(divider + "\n");
     }
 
+    public static void showTask(Task description, int numOfTasks) {
+        System.out.println(divider);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("    " + description.toString());
+        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+        System.out.println(divider + "\n");
+    }
+
     public static void showMarkTaskMessage(Task task) {
         System.out.println(divider);
         System.out.println("Nice! I've marked this task as done:");
