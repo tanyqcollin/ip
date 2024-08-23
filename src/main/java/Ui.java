@@ -56,4 +56,12 @@ public class Ui {
         System.out.println("OOPS!! " + message);
         System.out.println(divider + "\n");
     }
+
+    public static void showTaskDeleted(Task task, int size) {
+        System.out.println(divider);
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + size + " tasks in the list.");
+        System.out.println(divider + "\n");
+    }
 }

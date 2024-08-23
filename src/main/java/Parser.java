@@ -57,6 +57,14 @@ public class Parser {
                 list.add(eventTask);
                 Ui.showTask(eventTask, list.size());
                 break;
+            case "delete":
+                if (words.length < 2) {
+                    throw new CarterException("Please provide the task number to delete.");
+                }
+                int deleteTaskNumber = Integer.parseInt(words[1]) - 1;
+                Task deletedTask = list.remove(deleteTaskNumber);
+                Ui.showTaskDeleted(deletedTask, list.size());
+                break;
             default:
                 throw new CarterException("I'm sorry, but I don't know what that means :-(");
         }
