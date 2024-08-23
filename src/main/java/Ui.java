@@ -50,4 +50,10 @@ public class Ui {
         }
         System.out.println(divider + "\n");
     }
+
+    public static void showError(String message) {
+        System.out.println(divider);
+        System.out.println("OOPS!! " + message);
+        System.out.println(divider + "\n");
+    }
 }
