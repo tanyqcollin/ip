@@ -16,7 +16,15 @@ public class Ui {
 
     public static void echo(String message) {
         System.out.println(divider);
-        System.out.println(message);
+        System.out.println("added: " + message);
+        System.out.println(divider + "\n");
+    }
+
+    public static void showList(Object[] list) {
+        System.out.println(divider);
+        for (int i = 1; i <= list.length; i++) {
+            System.out.println(i + ". " + list[i - 1]);
+        }
         System.out.println(divider + "\n");
     }
 }
