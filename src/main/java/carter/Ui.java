@@ -1,3 +1,5 @@
+package carter;
+
 public class Ui {
     private final static String DIVIDER = "____________________________________________________________";
 

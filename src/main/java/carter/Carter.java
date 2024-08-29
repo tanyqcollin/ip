@@ -1,3 +1,5 @@
+package carter;
+
 import java.util.Scanner;
 
 public class Carter {
