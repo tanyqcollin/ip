@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,16 +35,18 @@ public class Storage {
                     String[] parts = row.split("\\|");
                     String taskType = parts[0].trim();
                     boolean isDone = parts[1].trim().equals("1");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
                     switch(taskType) {
                     case "T":
                         tasks.add(new ToDo(parts[2], isDone));
                         break;
                     case "D":
-                        tasks.add(new Deadline(parts[2], parts[3].trim(), isDone));
+                        tasks.add(new Deadline(parts[2], LocalDateTime.parse(parts[3].trim(), formatter), isDone));
                         break;
                     case "E":
-                        tasks.add(new Event(parts[2], parts[3], parts[4], isDone));
+                        tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3].trim(), formatter),
+                                LocalDateTime.parse(parts[4].trim(), formatter), isDone));
                         break;
                     default:
                         throw new CarterException("File has been corrupted");

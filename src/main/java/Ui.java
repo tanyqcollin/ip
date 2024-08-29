@@ -1,67 +1,67 @@
 public class Ui {
-    private static String divider = "____________________________________________________________";
+    private final static String DIVIDER = "____________________________________________________________";
 
-    public static void showWelcomeMessage() {
-        System.out.println(divider);
+    public void showWelcomeMessage() {
+        System.out.println(DIVIDER);
         System.out.println("Hello! I'm Carter");
         System.out.println("What can I do for you?");
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showEndingMessage() {
-        System.out.println(divider);
+    public void showEndingMessage() {
+        System.out.println(DIVIDER);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(divider);
+        System.out.println(DIVIDER);
     }
 
-    public static void echo(String message) {
-        System.out.println(divider);
+    public void echo(String message) {
+        System.out.println(DIVIDER);
         System.out.println("added: " + message);
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showTask(Task description, int numOfTasks) {
-        System.out.println(divider);
+    public void showTask(Task description, int numOfTasks) {
+        System.out.println(DIVIDER);
         System.out.println("Got it. I've added this task:");
         System.out.println("    " + description.toString());
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showMarkTaskMessage(Task task) {
-        System.out.println(divider);
+    public void showMarkTaskMessage(Task task) {
+        System.out.println(DIVIDER);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("    " + task.toString());
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showUnmarkTaskMessage(Task task) {
-        System.out.println(divider);
+    public void showUnmarkTaskMessage(Task task) {
+        System.out.println(DIVIDER);
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("    " + task.toString());
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showList(Task[] list) {
-        System.out.println(divider);
+    public void showList(Task[] list) {
+        System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
             System.out.println(i + "." + list[i - 1].toString());
         }
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showError(String message) {
-        System.out.println(divider);
+    public void showError(String message) {
+        System.out.println(DIVIDER);
         System.out.println("OOPS!! " + message);
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
-    public static void showTaskDeleted(Task task, int size) {
-        System.out.println(divider);
+    public void showTaskDeleted(Task task, int size) {
+        System.out.println(DIVIDER);
         System.out.println(" Noted. I've removed this task:");
         System.out.println("   " + task);
         System.out.println(" Now you have " + size + " tasks in the list.");
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 }

@@ -1,40 +1,49 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Carter {
-    public static void main(String[] args) {
-        Ui.showWelcomeMessage();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        Storage s = new Storage("./data/Carter.txt");
-
-        List<Task> taskList = new ArrayList<>();
+    public Carter(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            taskList = s.load();
-            if(!taskList.isEmpty()) {
-                Parser.parse("list", taskList);
-            }
+            tasks = new TaskList(storage.load());
         } catch (CarterException e) {
-            Ui.showError(e.getMessage());
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
         }
+    }
 
+    public void run() {
+        ui.showWelcomeMessage();
+
+        boolean isExit = false;
         Scanner sc = new Scanner(System.in);
-        String input;
-        do {
-            input = sc.nextLine();
+        while (!isExit) {
             try {
-                if (!input.equals("bye")) Parser.parse(input, taskList);
-            } catch (CarterException e){
-                Ui.showError(e.getMessage());
+                String input = sc.nextLine();
+                if (!input.equals("bye")) {
+                    Parser.parse(input, tasks, ui);
+                } else {
+                    isExit = true;
+                }
+            } catch (CarterException e) {
+                ui.showError(e.getMessage());
             }
-        } while (!input.equals("bye"));
+        }
+        sc.close();
 
         try {
-            s.save(taskList);
+            storage.save(tasks.getTasks());
         } catch (CarterException e) {
-            Ui.showError(e.getMessage());
+            ui.showError(e.getMessage());
         }
 
-        Ui.showEndingMessage();
+        ui.showEndingMessage();
+    }
+    public static void main(String[] args) {
+        new Carter("./data/Carter.txt").run();
     }
 }

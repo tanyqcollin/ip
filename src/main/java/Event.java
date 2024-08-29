@@ -2,20 +2,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
-        this.from = LocalDateTime.parse(from.trim(), formatter);
-        this.to = LocalDateTime.parse(to.trim(), formatter);
+        this.from = from;
+        this.to = to;
     }
 
-    public Event(String description, String from, String to, boolean isDone) {
+    public Event(String description, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(description, isDone);
-        this.from = LocalDateTime.parse(from.trim(), formatter);
-        this.to = LocalDateTime.parse(to.trim(), formatter);
+        this.from = from;
+        this.to = to;
     }
 
     @Override

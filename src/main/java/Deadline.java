@@ -3,17 +3,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-
-        this.by = LocalDateTime.parse(by, formatter);
+        this.by = by;
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by, formatter);
+        this.by = by;
     }
 
     @Override
