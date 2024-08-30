@@ -2,11 +2,19 @@ package carter;
 
 import java.util.Scanner;
 
+/**
+ * The main application for Carter chat box system.
+ */
 public class Carter {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a new instance of Carter with specified file path for storage.
+     *
+     * @param filePath The file path to store the tasks.
+     */
     public Carter(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +26,9 @@ public class Carter {
         }
     }
 
+    /**
+     * Starts the Carter application, handle user input in the loop until user exit.
+     */
     public void run() {
         ui.showWelcomeMessage();
 
@@ -45,6 +56,12 @@ public class Carter {
 
         ui.showEndingMessage();
     }
+
+    /**
+     * The main method that initializes and runs the Carter application.
+     *
+     * @param args not used.
+     */
     public static void main(String[] args) {
         new Carter("./data/Carter.txt").run();
     }

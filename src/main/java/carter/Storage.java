@@ -10,13 +10,28 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represent the storage for the task in Carter.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new instance of Storage with specified file path.
+     *
+     * @param filePath The file path where the tasks to be stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the tasks from the storage file.
+     * If the file does not exist, it will be created.
+     *
+     * @return A list of tasks from storage file.
+     * @throws CarterException If the file is corrupted.
+     */
     public List<Task> load() throws CarterException {
         List<Task> tasks = new ArrayList<>();
 
@@ -62,6 +77,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the list of tasks into the storage file.
+     *
+     * @param tasks tasks to be saved
+     * @throws CarterException If there is an error saving thr task into the storage file.
+     */
     public void save(List<Task> tasks) throws CarterException {
         try {
             FileWriter fw = new FileWriter(filePath);
