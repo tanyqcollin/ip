@@ -4,8 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles the parsing of the user command for Carter.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and performs the corresponding action.
+     *
+     * @param input The user input command as String.
+     * @param tasks The TaskList containing the current tasks.
+     * @param ui The Ui used to display message to the user.
+     * @throws CarterException If the user input is invalid or cannot be recognized.
+     */
     public static void parse(String input, TaskList tasks, Ui ui) throws CarterException {
         String[] words = input.split(" ", 2);
         String command = words[0];
