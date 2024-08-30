@@ -101,4 +101,13 @@ public class Ui {
         System.out.println(" Now you have " + size + " tasks in the list.");
         System.out.println(DIVIDER + "\n");
     }
+
+    public void showMatchingTask(Task[] list) {
+        System.out.println(DIVIDER);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= list.length; i++) {
+            System.out.println(i + "." + list[i - 1].toString());
+        }
+        System.out.println(DIVIDER + "\n");
+    }
 }

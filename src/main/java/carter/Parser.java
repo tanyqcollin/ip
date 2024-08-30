@@ -101,7 +101,7 @@ public class Parser {
             case "find":
                 String keyword = words[1].trim();
                 List<Task> taskList = tasks.find(keyword);
-                ui.showList(taskList.toArray(new Task[0]));
+                ui.showMatchingTask(taskList.toArray(new Task[0]));
                 break;
         default:
             throw new CarterException("I'm sorry, but I don't know what that means :-(");
