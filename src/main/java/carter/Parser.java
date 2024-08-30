@@ -3,6 +3,7 @@ package carter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Handles the parsing of the user command for Carter.
@@ -97,6 +98,11 @@ public class Parser {
             Task deletedTask = tasks.deleteTask(deleteTaskNumber);
             ui.showTaskDeleted(deletedTask, tasks.getLength());
             break;
+            case "find":
+                String keyword = words[1].trim();
+                List<Task> taskList = tasks.find(keyword);
+                ui.showList(taskList.toArray(new Task[0]));
+                break;
         default:
             throw new CarterException("I'm sorry, but I don't know what that means :-(");
         }

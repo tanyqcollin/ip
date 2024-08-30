@@ -78,11 +78,28 @@ public class TaskList {
     }
 
     /**
-     * Return the list of tasks in the TaskList.
+     * Returns the list of tasks in the TaskList.
      *
      * @return The list of tasks.
      */
     public List<Task> getTasks() {
         return this.tasks;
+    }
+
+    /**
+     * Returns a list of task with specified keyword.
+     *
+     * @param keyword The keyword to search in the tasks.
+     * @return The list of tasks containing the keyword.
+     */
+    public List<Task> find(String keyword) {
+        List<Task> task = new ArrayList<>();
+        for (Task t : tasks) {
+            boolean isFound = t.toString().contains(keyword);
+            if (isFound) {
+                task.add(t);
+            }
+        }
+        return task;
     }
 }
