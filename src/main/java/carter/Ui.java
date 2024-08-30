@@ -16,12 +16,6 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void echo(String message) {
-        System.out.println(DIVIDER);
-        System.out.println("added: " + message);
-        System.out.println(DIVIDER + "\n");
-    }
-
     public void showTask(Task description, int numOfTasks) {
         System.out.println(DIVIDER);
         System.out.println("Got it. I've added this task:");
