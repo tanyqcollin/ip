@@ -102,6 +102,11 @@ public class Ui {
         System.out.println(DIVIDER + "\n");
     }
 
+    /**
+     * Displays a message when find tasks with keywords.
+     *
+     * @param list The list of tasks that match the keyword.
+     */
     public void showMatchingTask(Task[] list) {
         System.out.println(DIVIDER);
         System.out.println("Here are the matching tasks in your list:");
