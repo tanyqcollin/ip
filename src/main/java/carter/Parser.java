@@ -75,8 +75,8 @@ public class Parser {
             break;
         case "event":
             String[] eventDetail = words[1].split("/");
-            if (eventDetail.length < 3 || eventDetail[0].trim().isEmpty() ||
-                    eventDetail[1].trim().isEmpty() || eventDetail[2].trim().isEmpty()) {
+            if (eventDetail.length < 3 || eventDetail[0].trim().isEmpty()
+                    || eventDetail[1].trim().isEmpty() || eventDetail[2].trim().isEmpty()) {
                 throw new CarterException("The description and times of an event task cannot be empty.");
             }
             try {
@@ -98,11 +98,11 @@ public class Parser {
             Task deletedTask = tasks.deleteTask(deleteTaskNumber);
             ui.showTaskDeleted(deletedTask, tasks.getLength());
             break;
-            case "find":
-                String keyword = words[1].trim();
-                List<Task> taskList = tasks.find(keyword);
-                ui.showMatchingTask(taskList.toArray(new Task[0]));
-                break;
+        case "find":
+            String keyword = words[1].trim();
+            List<Task> taskList = tasks.find(keyword);
+            ui.showMatchingTask(taskList.toArray(new Task[0]));
+            break;
         default:
             throw new CarterException("I'm sorry, but I don't know what that means :-(");
         }
