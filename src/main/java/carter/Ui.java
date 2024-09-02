@@ -4,7 +4,7 @@ package carter;
  * Represents the user interface of the Carter application.
  */
 public class Ui {
-    private final static String DIVIDER = "____________________________________________________________";
+    private static final String DIVIDER = "____________________________________________________________";
 
     /**
      * Displays the welcome message when the application start.
