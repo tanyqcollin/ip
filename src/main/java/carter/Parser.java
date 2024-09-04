@@ -185,6 +185,9 @@ public class Parser {
             if (words.length < 2) {
                 throw new CarterException("Please provide the task number to delete.");
             }
+            if (Integer.parseInt(words[1]) > tasks.getLength()) {
+                throw new CarterException("Please provide a valid number");
+            }
             int deleteTaskNumber = Integer.parseInt(words[1]) - 1;
             Task deletedTask = tasks.deleteTask(deleteTaskNumber);
             result = res.showTaskDeleted(deletedTask, tasks.getLength());
