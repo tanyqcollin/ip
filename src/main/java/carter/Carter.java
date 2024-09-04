@@ -9,6 +9,7 @@ public class Carter {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Response res;
 
     /**
      * Constructs a new instance of Carter with specified file path for storage.
@@ -17,6 +18,7 @@ public class Carter {
      */
     public Carter(String filePath) {
         ui = new Ui();
+        res = new Response();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -55,6 +57,32 @@ public class Carter {
         }
 
         ui.showEndingMessage();
+    }
+
+    /**
+     * Returns String of response with specified input
+     * @param input
+     * @return String of response
+     */
+    public String getResponse(String input) {
+        try {
+            if (!input.equals("bye")) {
+                return Parser.parse(input, tasks, res);
+            } else {
+                saveData();
+                return res.showEndingMessage();
+            }
+        } catch (CarterException e) {
+            return res.showError(e.getMessage());
+        }
+    }
+
+    public void saveData() {
+        try {
+            storage.save(tasks.getTasks());
+        } catch (CarterException e) {
+            ui.showError(e.getMessage());
+        }
     }
 
     /**
