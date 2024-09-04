@@ -68,7 +68,7 @@ public class Ui {
      *
      * @param list A list of tasks to be displayed.
      */
-    public void showList(Task[] list) {
+    public void showList(Task... list) {
         System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
@@ -107,7 +107,7 @@ public class Ui {
      *
      * @param list The list of tasks that match the keyword.
      */
-    public void showMatchingTask(Task[] list) {
+    public void showMatchingTask(Task... list) {
         System.out.println(DIVIDER);
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
