@@ -26,7 +26,7 @@ public class Response {
                 + "    " + task.toString();
     }
 
-    public String showList(Task[] list) {
+    public String showList(Task... list) {
         StringBuilder s = new StringBuilder();
         s.append("Here are the tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
@@ -45,7 +45,7 @@ public class Response {
                 + " Now you have " + size + " tasks in the list.";
     }
 
-    public String showMatchingTask(Task[] list) {
+    public String showMatchingTask(Task... list) {
         StringBuilder s = new StringBuilder();
         s.append("Here are the matching tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
