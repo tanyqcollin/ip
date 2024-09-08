@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private final String filePath;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Constructs a new instance of Storage with specified file path.
@@ -37,40 +38,18 @@ public class Storage {
 
         try {
             File file = new File(filePath);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } else {
-                List<String> data = new LinkedList<>();
-                Scanner s = new Scanner(file);
+            boolean fileNotExist = !file.exists();
 
-                while (s.hasNext()) {
-                    data.add(s.nextLine());
-                }
-
-                for (String row : data) {
-                    String[] parts = row.split("\\|");
-                    String taskType = parts[0].trim();
-                    boolean isDone = parts[1].trim().equals("1");
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-                    switch(taskType) {
-                    case "T":
-                        tasks.add(new ToDo(parts[2], isDone));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(parts[2], LocalDateTime.parse(parts[3].trim(), formatter), isDone));
-                        break;
-                    case "E":
-                        tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3].trim(), formatter),
-                                LocalDateTime.parse(parts[4].trim(), formatter), isDone));
-                        break;
-                    default:
-                        throw new CarterException("File has been corrupted");
-                    }
-                }
+            if (fileNotExist) {
+                createFile(file);
+                return tasks;
             }
 
+            List<String> data = readFile(file);
+
+            for (String row : data) {
+                tasks.add(parseTask(row));
+            }
         } catch (IOException e) {
             throw new CarterException("Error loading task from the file");
         }
@@ -92,6 +71,41 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             throw new CarterException("Error saving data to file");
+        }
+    }
+
+    private void createFile(File file) throws IOException{
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+    }
+
+    private List<String> readFile(File file) throws IOException {
+        List<String> data = new LinkedList<>();
+        Scanner s = new Scanner(file);
+
+        while (s.hasNext()) {
+            data.add(s.nextLine());
+        }
+
+        return data;
+    }
+
+    private Task parseTask(String line) throws CarterException {
+        String[] parts = line.split("\\|");
+        String taskType = parts[0].trim();
+        boolean isDone = parts[1].trim().equals("1");
+
+        switch(taskType) {
+            case "T":
+                return new ToDo(parts[2].trim(), isDone);
+            case "D":
+                return new Deadline(parts[2].trim(), LocalDateTime.parse(parts[3].trim(), FORMATTER), isDone);
+            case "E":
+                return new Event(parts[2].trim(),
+                        LocalDateTime.parse(parts[3].trim(), FORMATTER),
+                        LocalDateTime.parse(parts[4].trim(), FORMATTER), isDone);
+            default:
+                throw new CarterException("File has been corrupted. Invalid task type: " + taskType);
         }
     }
 }
