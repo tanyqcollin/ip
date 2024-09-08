@@ -36,6 +36,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Carter instance */
     public void setCarter(Carter c) {
         carter = c;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(carter.showWelcomeMessage(), dukeImage));
     }
 
     @FXML
