@@ -23,6 +23,7 @@ public class Storage {
      * @param filePath The file path where the tasks to be stored.
      */
     public Storage(String filePath) {
+        assert filePath != null : "The file path should not be null";
         this.filePath = filePath;
     }
 
@@ -63,9 +64,11 @@ public class Storage {
      * @throws CarterException If there is an error saving thr task into the storage file.
      */
     public void save(List<Task> tasks) throws CarterException {
+        assert tasks != null : "task list should not be null";
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {
+                assert task != null : "task should not be null";
                 fw.write(task.toFileString() + System.lineSeparator());
             }
             fw.close();
