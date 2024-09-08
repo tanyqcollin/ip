@@ -1,5 +1,8 @@
 package carter;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class Response {
     public String showWelcomeMessage() {
         return "Hello! I'm Carter" + "\n"
@@ -27,11 +30,12 @@ public class Response {
     }
 
     public String showList(Task... list) {
-        StringBuilder s = new StringBuilder();
-        s.append("Here are the tasks in your list:");
-        for (int i = 1; i <= list.length; i++) {
-            s.append("\n").append(i).append(".").append(list[i - 1].toString());
-        }
+        StringBuilder s = new StringBuilder("Here are the tasks in your list:");
+        s.append("\n").append(
+                IntStream.range(0, list.length)
+                        .mapToObj(i -> (i + 1) + "." + list[i].toString())
+                        .collect(Collectors.joining("\n"))
+        );
         return s.toString();
     }
 
@@ -46,11 +50,14 @@ public class Response {
     }
 
     public String showMatchingTask(Task... list) {
-        StringBuilder s = new StringBuilder();
-        s.append("Here are the matching tasks in your list:");
-        for (int i = 1; i <= list.length; i++) {
-            s.append(i).append(".").append(list[i - 1].toString());
-        }
+        StringBuilder s = new StringBuilder("Here are the matching tasks in your list:");
+
+        s.append("\n").append(
+                IntStream.range(0, list.length)
+                        .mapToObj(i -> (i + 1) + "." + list[i].toString())
+                        .collect(Collectors.joining("\n"))
+        );
+
         return s.toString();
     }
 }
