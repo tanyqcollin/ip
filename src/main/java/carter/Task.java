@@ -3,7 +3,7 @@ package carter;
 /**
  *  Represents an abstract task in Carter
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String description;
 
@@ -78,4 +78,39 @@ public abstract class Task {
      * @return A string representation of the task formatted for file storage.
      */
     public abstract String toFileString();
+
+    @Override
+    public int compareTo(Task other) {
+        if (this instanceof ToDo) {
+            return compareWithTodo(other);
+        } else if (this instanceof Deadline) {
+            return compareWithDeadline(other);
+        } else if (this instanceof Event) {
+            return compareWithEvent(other);
+        } else {
+            return 0;
+        }
+    }
+
+    private int compareWithTodo(Task other) {
+        return (other instanceof ToDo) ? 0 : -1;
+    }
+
+    private int compareWithDeadline(Task other) {
+        if (other instanceof ToDo) {
+            return 1;
+        } else if (other instanceof Deadline) {
+            return ((Deadline) this).by.compareTo(((Deadline) other).by);
+        } else {
+            return -1;
+        }
+    }
+
+    private int compareWithEvent(Task other) {
+        if (other instanceof Event) {
+            return ((Event) this).from.compareTo(((Event) other).from);
+        } else {
+            return 1;
+        }
+    }
 }

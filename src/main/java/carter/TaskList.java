@@ -1,6 +1,7 @@
 package carter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,12 +29,14 @@ public class TaskList {
 
     /**
      * Adds a task into the TaskList.
+     * After adding, the task list is sorted based on task type and specific attributes.
      *
      * @param task Task to be added to the TaskList.
      */
     public void addTask(Task task) {
         assert task != null : "task should not be null";
         tasks.add(task);
+        Collections.sort(tasks);
     }
 
     /**
