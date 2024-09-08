@@ -32,6 +32,9 @@ public class Ui {
      * @param numOfTasks The number of the task in list.
      */
     public void showTask(Task description, int numOfTasks) {
+        assert description != null : "description should not be null";
+        assert numOfTasks >= 0 : "number of tasks should be non-negative";
+
         System.out.println(DIVIDER);
         System.out.println("Got it. I've added this task:");
         System.out.println("    " + description.toString());
@@ -45,6 +48,8 @@ public class Ui {
      * @param task The tasks that was marked as done.
      */
     public void showMarkTaskMessage(Task task) {
+        assert task != null : "task should not be null";
+
         System.out.println(DIVIDER);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("    " + task.toString());
@@ -57,6 +62,8 @@ public class Ui {
      * @param task The tasks that was marked as not done.
      */
     public void showUnmarkTaskMessage(Task task) {
+        assert task != null : "task should not be null";
+
         System.out.println(DIVIDER);
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("    " + task.toString());
@@ -69,6 +76,8 @@ public class Ui {
      * @param list A list of tasks to be displayed.
      */
     public void showList(Task... list) {
+        assert list != null : "task list should not be null";
+
         System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= list.length; i++) {
@@ -83,6 +92,8 @@ public class Ui {
      * @param message The error message to be displayed.
      */
     public void showError(String message) {
+        assert message != null : "Error message should not be null";
+
         System.out.println(DIVIDER);
         System.out.println("OOPS!! " + message);
         System.out.println(DIVIDER + "\n");
@@ -95,6 +106,9 @@ public class Ui {
      * @param size The current size of the list.
      */
     public void showTaskDeleted(Task task, int size) {
+        assert task != null : "task should not be null";
+        assert size >= 0 : "size should be non-negative";
+
         System.out.println(DIVIDER);
         System.out.println(" Noted. I've removed this task:");
         System.out.println("   " + task);
@@ -108,6 +122,8 @@ public class Ui {
      * @param list The list of tasks that match the keyword.
      */
     public void showMatchingTask(Task... list) {
+        assert list != null : "task list should not be null";
+
         System.out.println(DIVIDER);
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i <= list.length; i++) {

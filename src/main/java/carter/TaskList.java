@@ -22,6 +22,7 @@ public class TaskList {
      * @param tasks The list of task to initialize the TaskList with.
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "task list should not be null";
         this.tasks = tasks;
     }
 
@@ -31,6 +32,7 @@ public class TaskList {
      * @param task Task to be added to the TaskList.
      */
     public void addTask(Task task) {
+        assert task != null : "task should not be null";
         tasks.add(task);
     }
 
@@ -41,6 +43,7 @@ public class TaskList {
      * @return The deleted task from the TaskList.
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < tasks.size() : "Index out of bounds: " + index;
         return tasks.remove(index);
     }
 
@@ -51,6 +54,7 @@ public class TaskList {
      * @return The marked task from TaskList.
      */
     public Task markTask(int index) {
+        assert index >= 0 && index < tasks.size() : "Index out of bounds: " + index;
         Task task = tasks.get(index);
         task.markAsDone();
         return task;
@@ -63,6 +67,7 @@ public class TaskList {
      * @return The unmarked task from TaskList.
      */
     public Task unMarkTask(int index) {
+        assert index >= 0 && index < tasks.size() : "Index out of bounds: " + index;
         Task task = tasks.get(index);
         task.markAsNotDone();
         return task;
@@ -93,6 +98,7 @@ public class TaskList {
      * @return The list of tasks containing the keyword.
      */
     public List<Task> find(String keyword) {
+        assert keyword != null : "keyword should not be null";
         List<Task> task = new ArrayList<>();
         for (Task t : tasks) {
             boolean isFound = t.toString().contains(keyword);
