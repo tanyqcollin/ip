@@ -14,8 +14,6 @@ public abstract class Task {
      * @param description The description of task.
      */
     public Task(String description) {
-        assert description != null : "description should not be null";
-
         this.isDone = false;
         this.description = description.trim();
     }
@@ -27,8 +25,6 @@ public abstract class Task {
      * @param isDone The completion status of task.
      */
     public Task(String description, boolean isDone) {
-        assert description != null : "description should not be null";
-
         this.isDone = isDone;
         this.description = description.trim();
     }
