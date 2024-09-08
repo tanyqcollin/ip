@@ -14,8 +14,9 @@ import java.util.Scanner;
  * Represent the storage for the task in Carter.
  */
 public class Storage {
-    private final String filePath;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final String filePath;
+
 
     /**
      * Constructs a new instance of Storage with specified file path.
@@ -77,7 +78,7 @@ public class Storage {
         }
     }
 
-    private void createFile(File file) throws IOException{
+    private void createFile(File file) throws IOException {
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
@@ -99,16 +100,16 @@ public class Storage {
         boolean isDone = parts[1].trim().equals("1");
 
         switch(taskType) {
-            case "T":
-                return new ToDo(parts[2].trim(), isDone);
-            case "D":
-                return new Deadline(parts[2].trim(), LocalDateTime.parse(parts[3].trim(), FORMATTER), isDone);
-            case "E":
-                return new Event(parts[2].trim(),
-                        LocalDateTime.parse(parts[3].trim(), FORMATTER),
-                        LocalDateTime.parse(parts[4].trim(), FORMATTER), isDone);
-            default:
-                throw new CarterException("File has been corrupted. Invalid task type: " + taskType);
+        case "T":
+            return new ToDo(parts[2].trim(), isDone);
+        case "D":
+            return new Deadline(parts[2].trim(), LocalDateTime.parse(parts[3].trim(), FORMATTER), isDone);
+        case "E":
+            return new Event(parts[2].trim(),
+                    LocalDateTime.parse(parts[3].trim(), FORMATTER),
+                    LocalDateTime.parse(parts[4].trim(), FORMATTER), isDone);
+        default:
+            throw new CarterException("File has been corrupted. Invalid task type: " + taskType);
         }
     }
 }

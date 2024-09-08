@@ -63,7 +63,7 @@ public class Parser {
         return res.showList(tasks.getTasks().toArray(output));
     }
 
-    private static String handleMarkCommand(String[] words, TaskList tasks, Response res) throws CarterException{
+    private static String handleMarkCommand(String[] words, TaskList tasks, Response res) throws CarterException {
         if (words.length < 2) {
             throw new CarterException("Please provide the task number to mark.");
         }

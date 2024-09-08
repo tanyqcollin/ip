@@ -1,7 +1,5 @@
 package carter;
 
-import java.util.Scanner;
-
 /**
  * The main application for Carter chat box system.
  */
@@ -51,6 +49,9 @@ public class Carter {
         }
     }
 
+    /**
+     * Save the current TaskList before the application terminate.
+     */
     public void saveData() {
         try {
             storage.save(tasks.getTasks());
