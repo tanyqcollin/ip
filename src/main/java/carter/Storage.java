@@ -22,6 +22,7 @@ public class Storage {
      * @param filePath The file path where the tasks to be stored.
      */
     public Storage(String filePath) {
+        assert filePath != null : "The file path should not be null";
         this.filePath = filePath;
     }
 
@@ -56,12 +57,15 @@ public class Storage {
 
                     switch(taskType) {
                     case "T":
+                        assert parts.length == 3 : "Todo task has incorrect format";
                         tasks.add(new ToDo(parts[2], isDone));
                         break;
                     case "D":
+                        assert parts.length == 4 : "Deadline task has incorrect format";
                         tasks.add(new Deadline(parts[2], LocalDateTime.parse(parts[3].trim(), formatter), isDone));
                         break;
                     case "E":
+                        assert parts.length == 5 : "Event task has incorrect format";
                         tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3].trim(), formatter),
                                 LocalDateTime.parse(parts[4].trim(), formatter), isDone));
                         break;
@@ -84,9 +88,11 @@ public class Storage {
      * @throws CarterException If there is an error saving thr task into the storage file.
      */
     public void save(List<Task> tasks) throws CarterException {
+        assert tasks != null : "task list should not be null";
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {
+                assert task != null : "task should not be null";
                 fw.write(task.toFileString() + System.lineSeparator());
             }
             fw.close();
