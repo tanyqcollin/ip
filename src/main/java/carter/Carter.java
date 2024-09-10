@@ -38,17 +38,25 @@ public class Carter {
      */
     public String getResponse(String input) {
         try {
-            if (!input.equals("bye")) {
-                return Parser.parse(input, tasks, res);
-            } else {
+            if (input.equals("bye")) {
                 saveData();
                 return res.showEndingMessage();
+            } else if (input.equals("archive")) {
+                return archiveTask();
+            } else {
+                return Parser.parse(input, tasks, res);
             }
         } catch (CarterException e) {
             return res.showError(e.getMessage());
         }
     }
 
+    private String archiveTask() throws CarterException {
+        storage.archive(tasks.getTasks());
+        TaskList temp = tasks;
+        tasks = tasks.archiveTask();
+        return res.showArchiveTask(temp.getTasks().toArray(new Task[0]));
+    }
     /**
      * Save the current TaskList before the application terminate.
      */
