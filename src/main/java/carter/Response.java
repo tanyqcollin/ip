@@ -41,7 +41,7 @@ public class Response {
 
         return "Got it. I've added this task:" + "\n"
                 + "    " + description.toString()
-                + "Now you have" + numOfTasks + " tasks in the list.";
+                + " Now you have " + numOfTasks + " tasks in the list.";
     }
 
     /**
@@ -140,6 +140,23 @@ public class Response {
                         .mapToObj(i -> (i + 1) + "." + list[i].toString())
                         .collect(Collectors.joining("\n"))
         );
+        return s.toString();
+    }
+
+    /**
+     * Returns a message listing all archived tasks.
+     * @param list task that have archived.
+     * @return A message listing all archived tasks.
+     */
+    public String showArchiveTask(Task... list) {
+        StringBuilder s = new StringBuilder("Here is your archived tasks:");
+
+        s.append("\n").append(
+                IntStream.range(0, list.length)
+                        .mapToObj(i -> (i + 1) + "." + list[i].toString())
+                        .collect(Collectors.joining("\n"))
+        );
+
         return s.toString();
     }
 }

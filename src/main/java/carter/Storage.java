@@ -62,10 +62,33 @@ public class Storage {
      * Saves the list of tasks into the storage file.
      *
      * @param tasks tasks to be saved
-     * @throws CarterException If there is an error saving thr task into the storage file.
+     * @throws CarterException If there is an error saving the task into the storage file.
      */
     public void save(List<Task> tasks) throws CarterException {
         assert tasks != null : "task list should not be null";
+        writeFile(tasks, filePath);
+    }
+
+    /**
+     * Archives the list of tasks into the archive file.
+     *
+     * @param tasks tasks to be archived.
+     * @throws CarterException If there is an error archive the task into archive file.
+     */
+    public void archive(List<Task> tasks) throws CarterException {
+        File originalFile = new File(filePath);
+        File directory = originalFile.getParentFile();
+        File archiveFile = new File(directory, "archive.txt");
+
+        try {
+            createFile(archiveFile);
+            writeFile(tasks, archiveFile.getPath());
+        } catch (IOException e) {
+            throw new CarterException("Error create a new txt file");
+        }
+    }
+
+    private void writeFile(List<Task> tasks, String filePath) throws CarterException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {

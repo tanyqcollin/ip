@@ -77,6 +77,15 @@ public class TaskList {
     }
 
     /**
+     * Returns a new empty TaskList after archive all tasks.
+     *
+     * @return An empty Task List.
+     */
+    public TaskList archiveTask() {
+        return new TaskList();
+    }
+
+    /**
      * Returns the number of tasks in the TaskList.
      *
      * @return The number of tasks in the TaskList.
