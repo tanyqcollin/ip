@@ -1,7 +1,7 @@
 package carter;
 
 /**
- * Represent an exception specified for Carter application.
+ * Represents an exception specified for Carter application.
  */
 public class CarterException extends Exception {
     /**

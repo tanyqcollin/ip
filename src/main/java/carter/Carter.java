@@ -58,7 +58,7 @@ public class Carter {
         return res.showArchiveTask(temp.getTasks().toArray(new Task[0]));
     }
     /**
-     * Save the current TaskList before the application terminate.
+     * Saves the current TaskList before the application terminate.
      */
     public void saveData() {
         try {

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represent the list of tasks of the Carter application.
+ * Represents the list of tasks of the Carter application.
  */
 public class TaskList {
     private final List<Task> tasks;

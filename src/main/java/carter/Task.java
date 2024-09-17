@@ -8,7 +8,7 @@ public abstract class Task implements Comparable<Task> {
     protected String description;
 
     /**
-     * Construct a new Task with specified description.
+     * Constructs a new Task with specified description.
      * The task is initially marked not done.
      *
      * @param description The description of task.
@@ -21,7 +21,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Construct a new Task with specified description and completion status.
+     * Constructs a new Task with specified description and completion status.
      *
      * @param description The description of task.
      * @param isDone The completion status of task.
@@ -61,7 +61,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Return a string representation of the task,
+     * Returns a string representation of the task,
      * including it description and completion status.
      *
      * @return A string representation of the task.

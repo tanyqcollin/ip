@@ -29,7 +29,7 @@ public class Storage {
     }
 
     /**
-     * Load the tasks from the storage file.
+     * Loads the tasks from the storage file.
      * If the file does not exist, it will be created.
      *
      * @return A list of tasks from storage file.
