@@ -11,17 +11,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represent the storage for the task in Carter.
+ * Represents the storage for tasks in the Carter application.
  */
 public class Storage {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final String filePath;
 
-
     /**
-     * Constructs a new instance of Storage with specified file path.
+     * Constructs a new instance of Storage with the specified file path.
      *
-     * @param filePath The file path where the tasks to be stored.
+     * @param filePath The file path where the tasks will be stored.
      */
     public Storage(String filePath) {
         assert filePath != null : "The file path should not be null";
@@ -29,51 +28,47 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks from the storage file.
-     * If the file does not exist, it will be created.
+     * Loads the tasks from the storage file. If the file does not exist, it will be created.
      *
-     * @return A list of tasks from storage file.
-     * @throws CarterException If the file is corrupted.
+     * @return A list of tasks from the storage file.
+     * @throws CarterException If the file is corrupted or cannot be read.
      */
     public List<Task> load() throws CarterException {
         List<Task> tasks = new ArrayList<>();
 
         try {
             File file = new File(filePath);
-            boolean fileNotExist = !file.exists();
-
-            if (fileNotExist) {
+            if (!file.exists()) {
                 createFile(file);
                 return tasks;
             }
 
             List<String> data = readFile(file);
-
             for (String row : data) {
                 tasks.add(parseTask(row));
             }
         } catch (IOException e) {
-            throw new CarterException("Error loading task from the file");
+            throw new CarterException("Error loading tasks from the file");
         }
         return tasks;
     }
 
     /**
-     * Saves the list of tasks into the storage file.
+     * Saves the list of tasks to the storage file.
      *
-     * @param tasks tasks to be saved
-     * @throws CarterException If there is an error saving the task into the storage file.
+     * @param tasks The list of tasks to be saved.
+     * @throws CarterException If there is an error saving the tasks to the file.
      */
     public void save(List<Task> tasks) throws CarterException {
-        assert tasks != null : "task list should not be null";
+        assert tasks != null : "Task list should not be null";
         writeFile(tasks, filePath);
     }
 
     /**
-     * Archives the list of tasks into the archive file.
+     * Archives the list of tasks into an archive file.
      *
-     * @param tasks tasks to be archived.
-     * @throws CarterException If there is an error archive the task into archive file.
+     * @param tasks The list of tasks to be archived.
+     * @throws CarterException If there is an error archiving the tasks to the file.
      */
     public void archive(List<Task> tasks) throws CarterException {
         File originalFile = new File(filePath);
@@ -84,45 +79,69 @@ public class Storage {
             createFile(archiveFile);
             writeFile(tasks, archiveFile.getPath());
         } catch (IOException e) {
-            throw new CarterException("Error create a new txt file");
+            throw new CarterException("Error creating archive file");
         }
     }
 
+    /**
+     * Writes the tasks to the specified file.
+     *
+     * @param tasks    The list of tasks to be written.
+     * @param filePath The file path where tasks will be written.
+     * @throws CarterException If there is an error writing to the file.
+     */
     private void writeFile(List<Task> tasks, String filePath) throws CarterException {
-        try {
-            FileWriter fw = new FileWriter(filePath);
+        try (FileWriter fw = new FileWriter(filePath)) {
             for (Task task : tasks) {
-                assert task != null : "task should not be null";
+                assert task != null : "Task should not be null";
                 fw.write(task.toFileString() + System.lineSeparator());
             }
-            fw.close();
         } catch (IOException e) {
             throw new CarterException("Error saving data to file");
         }
     }
 
+    /**
+     * Creates a new file if it does not exist.
+     *
+     * @param file The file to be created.
+     * @throws IOException If there is an error creating the file.
+     */
     private void createFile(File file) throws IOException {
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
 
+    /**
+     * Reads the content of the specified file.
+     *
+     * @param file The file to be read.
+     * @return A list of lines from the file.
+     * @throws IOException If there is an error reading the file.
+     */
     private List<String> readFile(File file) throws IOException {
         List<String> data = new LinkedList<>();
-        Scanner s = new Scanner(file);
-
-        while (s.hasNext()) {
-            data.add(s.nextLine());
+        try (Scanner s = new Scanner(file)) {
+            while (s.hasNext()) {
+                data.add(s.nextLine());
+            }
         }
-
         return data;
     }
 
+    /**
+     * Parses a line of text from the file into a Task object.
+     *
+     * @param line The line of text to be parsed.
+     * @return The corresponding Task object.
+     * @throws CarterException If the task type is invalid or the file is corrupted.
+     */
     private Task parseTask(String line) throws CarterException {
         String[] parts = line.split("\\|");
         String taskType = parts[0].trim();
         boolean isDone = parts[1].trim().equals("1");
 
-        switch(taskType) {
+        switch (taskType) {
         case "T":
             return new ToDo(parts[2].trim(), isDone);
         case "D":
@@ -132,7 +151,7 @@ public class Storage {
                     LocalDateTime.parse(parts[3].trim(), FORMATTER),
                     LocalDateTime.parse(parts[4].trim(), FORMATTER), isDone);
         default:
-            throw new CarterException("File has been corrupted. Invalid task type: " + taskType);
+            throw new CarterException("File is corrupted. Invalid task type: " + taskType);
         }
     }
 }
