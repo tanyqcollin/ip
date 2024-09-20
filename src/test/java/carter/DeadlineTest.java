@@ -35,7 +35,7 @@ public class DeadlineTest {
         LocalDateTime deadlineDateTime = LocalDateTime.of(2025, 1, 1, 16, 0);
         deadline = new Deadline("test task", deadlineDateTime);
         String actualOutput = deadline.toFileString();
-        String expectedOutput = "D | 0 | test task |2025-01-01 16:00";
+        String expectedOutput = "D | 0 | test task | 2025-01-01 16:00";
         assertEquals(expectedOutput, actualOutput);
     }
 }

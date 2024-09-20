@@ -14,6 +14,7 @@ public class Deadline extends Task {
      *
      * @param description The description of the task.
      * @param by The date and time by which the task should be completed.
+     * @throws IllegalArgumentException if the deadline is null.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -29,6 +30,7 @@ public class Deadline extends Task {
      * @param description The description of the task.
      * @param by The date and time by which the task should be completed.
      * @param isDone The completion status of the task.
+     * @throws IllegalArgumentException if the deadline is null.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
@@ -55,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " |"
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | "
                 + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
