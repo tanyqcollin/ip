@@ -147,7 +147,8 @@ public class Parser {
      * @param errorMessage The error message to throw if validation fails.
      * @throws CarterException If the input does not meet the required length.
      */
-    private static void validateInputLength(String[] words, int requiredLength, String errorMessage) throws CarterException {
+    private static void validateInputLength(String[] words,
+                                            int requiredLength, String errorMessage) throws CarterException {
         if (words.length < requiredLength || words[1].trim().isEmpty()) {
             throw new CarterException(errorMessage);
         }

@@ -1,6 +1,6 @@
 # Carter User Guide
 
-![Ui.png](/Ui.png)
+![Ui.png](/docs/Ui.png)
 
 Carter is a desktop application that helps you store tasks, such as to-dos, deadlines, and events.
 

@@ -77,8 +77,8 @@ public class Response {
     public String showList(Task... tasks) {
         assert tasks != null : "Task list should not be null";
 
-        return "Here are the tasks in your list:\n" +
-                IntStream.range(0, tasks.length)
+        return "Here are the tasks in your list:\n"
+                + IntStream.range(0, tasks.length)
                         .mapToObj(i -> (i + 1) + ". " + tasks[i].toString())
                         .collect(Collectors.joining("\n"));
     }
@@ -120,8 +120,8 @@ public class Response {
     public String showMatchingTask(Task... tasks) {
         assert tasks != null : "Task list should not be null";
 
-        return "Here are the matching tasks in your list:\n" +
-                IntStream.range(0, tasks.length)
+        return "Here are the matching tasks in your list:\n"
+                + IntStream.range(0, tasks.length)
                         .mapToObj(i -> (i + 1) + ". " + tasks[i].toString())
                         .collect(Collectors.joining("\n"));
     }
@@ -133,8 +133,8 @@ public class Response {
      * @return A message listing all archived tasks.
      */
     public String showArchiveTask(Task... tasks) {
-        return "Here are your archived tasks:\n" +
-                IntStream.range(0, tasks.length)
+        return "Here are your archived tasks:\n"
+                + IntStream.range(0, tasks.length)
                         .mapToObj(i -> (i + 1) + ". " + tasks[i].toString())
                         .collect(Collectors.joining("\n"));
     }
