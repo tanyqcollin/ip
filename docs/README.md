@@ -14,6 +14,7 @@ Carter is a desktop application that helps you store tasks, such as to-dos, dead
 - [Mark a task as done](#mark-task)
 - [Unmark a task as done](#unmark-task)
 - [Exit application](#exit-application)
+- [Archive task](#archive-task)
 
 ---
 ## Adding todos `todo` task
@@ -99,7 +100,7 @@ Expected Output:
 Ok, I've marked this task as not done yet.
     [D][] return book (by: Oct 15 2019 18:00)
 ```
-## Exit application
+## Exit Application
 Exit the application.
 
 Format: `bye` <br/>
@@ -110,4 +111,14 @@ Example: `bye` <br/>
 Expected Output:
 Bye! Hope to see you again soon.
 ```
-    
+## Archive Task
+Archive task and clear current task list.
+
+Format: `archive` <br/>
+Example: `archive` <br/>
+``` 
+Expected Output:
+Here are your archived tasks:
+    [T][] read me
+    [D][] return book (by: Oct 15 2019 18:00)
+```    
